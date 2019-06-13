@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.console;
 
+import jdk.nashorn.internal.runtime.regexp.RegExp;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -83,7 +84,22 @@ public class JobData {
 
         return jobs;
     }
+    public static ArrayList<HashMap<String, String>> findByValue(String searchTerm) {
 
+        loadData();
+        ArrayList<HashMap<String,String>> searchedJobs = new ArrayList<>();
+        for (HashMap<String, String> job : allJobs) {
+            for (String i : job.keySet()) {
+                if (job.get(i).toLowerCase().contains(searchTerm.toLowerCase())) {
+                    String x = job.get(i) ;
+                    searchedJobs.add(job);
+
+                }
+
+            }
+        }
+        return searchedJobs;
+    }
     /**
      * Read in data from a CSV file and store it in a list
      */
